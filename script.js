@@ -1,12 +1,28 @@
+class Pointt {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  distanceTo(point) {
+    let dx = point.x - this.x;
+    let dy = point.y - this.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  move(x, y) {
+    this.x += x;
+    this.y += y;
+  }
+}
+
 let dragTarget = null;
 let pizza;
 
-function setDragTargetPos(x, y) {
+function setDragTargetPos(point) {
   let rect = dragTarget.getBoundingClientRect();
-  x = x - rect.width / 2;
-  y = y - rect.height / 2;
-  dragTarget.style.left = x + "px";
-  dragTarget.style.top = y + "px";
+  point.move(rect.width / 2, rect.height / 2);
+  dragTarget.style.left = point.x + "px";
+  dragTarget.style.top = point.y + "px";
 }
 
 function distanceBetweenPoints(x1, y1, x2, y2) {
@@ -29,12 +45,13 @@ function getPosOnPizza(mousePos) {
 document.addEventListener("DOMContentLoaded", () => {
   pizza = document.querySelector(".circle");
   window.addEventListener("mousedown", (e) => {
+    let mousePoint = new Point(e.clientX, e.clientY);
     if (e.target.matches(".product")) {
       dragTarget = e.target.cloneNode(true);
       dragTarget.style.position = "fixed";
 
       document.body.append(dragTarget);
-      setDragTargetPos(e.clientX, e.clientY);
+      setDragTargetPos(mousePoint);
     }
 
     if (e.target.matches(".circle")) {
@@ -45,22 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("mousemove", (e) => {
     if (dragTarget) {
-      setDragTargetPos(e.clientX, e.clientY);
+      setDragTargetPos(new Point(e.clientX, e.clientY));
     }
   });
   window.addEventListener("mouseup", (e) => {
     if (dragTarget) {
-      let pizzaCenter = getPizzaCenter();
-      let pizzaRadius = getPizzaRadius();
-      // let mousePos = e.clientX,e.clientY;
-      let d = pizzaCenter.distanceTo(mousePos);
-      if (d < pizzaRadius) {
-        let newPos = getPosOnPizza(mousePos);
-        setDragTargetPos(newPos);
-        pizza.append(dragTarget);
-        dragTarget.style.position = "absolute";
-        dragTarget = null;
-      }
       dragTarget.remove();
       dragTarget = null;
     }

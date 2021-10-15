@@ -9,12 +9,12 @@
   position: relative;
   background: radial-gradient(
     closest-side circle at center,
-    #9a7826 80%,
-    #777 80%,
-    #777 100%
+    #ffcd40 80%,
+    #a67a00 80%,
+    #a67a00 100%
   );
-  width: 250px;
-  height: 250px;
+  width: 450px;
+  height: 450px;
   border-radius: 50%;
   margin: 50px auto;
 }
@@ -30,8 +30,13 @@
   margin: 0;
 }
 
-.product {
+/* .product {
   border: 1px solid gold;
   border-radius: 5px;
   margin-bottom: 5px;
+} */
+
+.icons {
+  width: 60px;
+  height: 50px;
 }

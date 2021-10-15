@@ -1,0 +1,37 @@
+/* .x {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at center, red, transparent);
+} */
+
+.circle {
+  /* background-color: burlywood; */
+  position: relative;
+  background: radial-gradient(
+    closest-side circle at center,
+    #9a7826 80%,
+    #777 80%,
+    #777 100%
+  );
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin: 50px auto;
+}
+
+.panel {
+  position: fixed;
+  border: 1px solid red;
+}
+
+.panel-products {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.product {
+  border: 1px solid gold;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}

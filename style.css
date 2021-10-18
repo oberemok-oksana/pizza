@@ -15,12 +15,12 @@
   position: relative;
   background: radial-gradient(
     closest-side circle at center,
-    #ffcd40 80%,
-    #a67a00 80%,
-    #a67a00 100%
+    #ffdf73 82%,
+    #ffc500 95%,
+    #ffc500 100%
   );
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   margin: 50px auto;
 }
@@ -52,4 +52,25 @@
   justify-content: flex-start;
   align-items: center;
   gap: 5px;
+}
+
+.order_btn {
+  margin: 0 auto;
+  display: block;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 5px 25px;
+  font-weight: 700;
+  cursor: pointer;
+
+  border-color: #a67e00;
+}
+
+.order_btn:active {
+  transform: scale(1.1);
+  background-color: rgba(255, 221, 115, 0.3);
+}
+
+.title {
+  text-align: center;
 }

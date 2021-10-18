@@ -75,11 +75,43 @@
           </div>
         </div>
       </aside>
-      <div class="x"></div>
-      <div class="circle"></div>
+      <div class="pizza_cost">
+        <div class="circle"></div>
+        <h2 class="title">Total cost: <span id="total-cost">20</span></h2>
+        <button type="submit" class="order_btn">Order</button>
+      </div>
     </div>
-    <h2 class="title">Total cost: <span id="total-cost">20</span></h2>
-    <button type="submit" class="order_btn">Order</button>
+    <div class="modal-window">
+      <div class="modal-window__window">
+        <div class="modal-window__body">
+          <table class="bill">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tomato</td>
+                <td>2</td>
+                <td>6</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td colspan="4">Total cost of pizza:</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-window__footer">
+          <button class="order_btn">Ok</button>
+        </div>
+      </div>
+    </div>
+
     <script src="./script.js"></script>
   </body>
 </html>

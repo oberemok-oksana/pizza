@@ -1,8 +1,14 @@
-/* .x {
-  width: 50px;
-  height: 50px;
-  background: radial-gradient(circle at center, red, transparent);
-} */
+.wrapper {
+  display: flex;
+  width: 1024px;
+  margin: 50px auto;
+}
+
+.wrapper-sauces {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .circle {
   /* background-color: burlywood; */
@@ -13,15 +19,14 @@
     #a67a00 80%,
     #a67a00 100%
   );
-  width: 450px;
-  height: 450px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
   margin: 50px auto;
 }
 
 .panel {
-  position: fixed;
-  border: 1px solid red;
+  padding: 20px;
 }
 
 .panel-products {
@@ -30,13 +35,21 @@
   margin: 0;
 }
 
-/* .product {
-  border: 1px solid gold;
-  border-radius: 5px;
-  margin-bottom: 5px;
-} */
+.product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
 
 .icons {
   width: 60px;
   height: 50px;
+}
+
+.sauces {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
 }

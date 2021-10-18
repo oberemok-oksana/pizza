@@ -8,56 +8,74 @@
     <title>Document</title>
   </head>
   <body>
-    <aside class="panel">
-      <ul class="panel-products">
-        <li class="product">
-          <img
-            data-price="7"
-            class="icons"
-            src="./img/cheese.png"
-            alt="cheese"
-          />
-          7
-        </li>
-        <li class="product">
-          <img
-            data-price="7"
-            class="icons"
-            src="./img/salami.png"
-            alt="salami"
-          />
-          7
-        </li>
-        <li class="product">
-          <img
-            data-price="4"
-            class="icons"
-            src="./img/olives.png"
-            alt="olives"
-          />
-          4
-        </li>
-        <li class="product">
-          <img data-price="3" class="icons" src="./img/onion.png" alt="onion" />
-          3
-        </li>
-        <li class="product">
-          <img
-            data-price="5"
-            class="icons"
-            src="./img/mushroom.png"
-            alt="mushroom"
-          />
-          5
-        </li>
-      </ul>
-      <input data-price="3" type="checkbox" class="sauce" id="ketchup" />
-      <label for="ketchup">ketchup 3</label>
-      <input data-price="4" type="checkbox" class="sauce" id="mayonnaise" />
-      <label for="mayonnaise">mayonnaise 4</label>
-    </aside>
-    <div class="x"></div>
-    <div class="circle"></div>
+    <div class="wrapper">
+      <aside class="panel">
+        <ul class="panel-products">
+          <li class="product">
+            <img
+              data-price="7"
+              class="icons"
+              src="./img/basil.png"
+              alt="basil"
+            />
+            7
+          </li>
+          <li class="product">
+            <img
+              data-price="7"
+              class="icons"
+              src="./img/mushroom.png"
+              alt="mushroom"
+            />
+            7
+          </li>
+          <li class="product">
+            <img
+              data-price="4"
+              class="icons"
+              src="./img/paprika.png"
+              alt="paprika"
+            />
+            4
+          </li>
+          <li class="product">
+            <img
+              data-price="3"
+              class="icons"
+              src="./img/onion.png"
+              alt="onion"
+            />
+            3
+          </li>
+          <li class="product">
+            <img
+              data-price="5"
+              class="icons"
+              src="./img/tomato.png"
+              alt="tomato"
+            />
+            5
+          </li>
+        </ul>
+        <div class="wrapper-sauces">
+          <div class="sauces">
+            <input data-price="3" type="checkbox" class="sauce" id="ketchup" />
+            <label for="ketchup">Ketchup 3</label>
+          </div>
+          <div class="sauces">
+            <input
+              data-price="4"
+              type="checkbox"
+              class="sauce"
+              id="mayonnaise"
+            />
+            <label for="mayonnaise">Mayonnaise 4 </label>
+          </div>
+        </div>
+      </aside>
+      <div class="x"></div>
+      <div class="circle"></div>
+    </div>
     <h2>Total cost: <span id="total-cost">20</span></h2>
     <script src="./script.js"></script>
   </body>

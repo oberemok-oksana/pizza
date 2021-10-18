@@ -26,9 +26,19 @@ class Circle {
   }
 }
 
+class Product {
+  constructor(name, count, price) {
+    this.name = name;
+    this.count = count;
+    this.price = price;
+  }
+}
+
 let dragTarget = null;
 let pizza;
-let totalCost = 20;
+const DOUGH_PRICE = 20;
+let totalCost = DOUGH_PRICE;
+let ingredients = [new Product("dough", 1, DOUGH_PRICE)];
 
 function setDragTargetPos(point) {
   let rect = dragTarget.getBoundingClientRect();
@@ -67,6 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let total = document.querySelector("#total-cost");
   let table = document.querySelector(".bill");
   let tableBody = document.querySelector(".modal-window__body");
+  let tbody = table.querySelector(".chosen_products");
+  let ordered = false;
+  let sauces = document.querySelectorAll(".sauce");
 
   window.addEventListener("mousedown", (e) => {
     e.preventDefault();
@@ -99,6 +112,22 @@ document.addEventListener("DOMContentLoaded", () => {
         pizza.append(dragTarget);
         dragTarget.style.position = "absolute";
         totalCost += parseFloat(dragTarget.dataset.price);
+        let ingredient = ingredients.find(
+          (item) => item.name === dragTarget.dataset.name
+        );
+        if (ingredient) {
+          ingredient.count++;
+        } else {
+          ingredients.push(
+            new Product(
+              dragTarget.dataset.name,
+              1,
+              parseFloat(dragTarget.dataset.price)
+            )
+          );
+        }
+
+        console.log(ingredients);
         dragTarget = null;
         total.innerHTML = totalCost;
       } else {
@@ -111,9 +140,20 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("contextmenu", (e) => {
     e.preventDefault();
     if (e.target.matches(".circle .icons")) {
-      totalCost -= e.target.dataset.price;
+      totalCost -= parseFloat(e.target.dataset.price);
       total.innerHTML = totalCost;
       e.target.remove();
+
+      let index = ingredients.findIndex(
+        (item) => item.name === e.target.dataset.name
+      );
+
+      if (ingredients[index].count === 1) {
+        ingredients.splice(index, 1);
+      } else {
+        ingredients[index].count--;
+      }
+      console.log(ingredients);
     }
   });
 
@@ -121,28 +161,80 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.matches(".sauce")) {
       if (e.target.checked) {
         totalCost += parseFloat(e.target.dataset.price);
+        ingredients.push(
+          new Product(
+            e.target.dataset.name,
+            1,
+            parseFloat(e.target.dataset.price)
+          )
+        );
       } else {
         totalCost -= parseFloat(e.target.dataset.price);
+        let index = ingredients.findIndex(
+          (item) => item.name === e.target.dataset.name
+        );
+        ingredients.splice(index, 1);
       }
       total.innerHTML = totalCost;
+
+      console.log(ingredients);
     }
   });
 
   orderBtn.addEventListener("click", () => {
     wrapper.style.display = "none";
     modal.style.display = "flex";
+    table.style.display = "table";
+    tbody.innerHTML = "";
+    let sum = 0;
+
+    ingredients.forEach((item) => {
+      let tr = document.createElement("tr");
+      let tdName = document.createElement("td");
+      let tdCount = document.createElement("td");
+      let tdPrice = document.createElement("td");
+      let tdSumm = document.createElement("td");
+      tdName.innerHTML = item.name;
+      tdCount.innerHTML = item.count;
+      tdPrice.innerHTML = item.price;
+      let ingredientsSum = item.count * item.price;
+      sum += ingredientsSum;
+      tdSumm.innerHTML = ingredientsSum;
+
+      tr.append(tdName, tdCount, tdPrice, tdSumm);
+      tbody.append(tr);
+    });
+
+    let trTotal = document.createElement("tr");
+    let tdTotal = document.createElement("td");
+    let td = document.createElement("td");
+    td.setAttribute("colspan", 3);
+    tdTotal.classList.add("bold");
+    td.classList.add("bold");
+    tdTotal.innerHTML = sum;
+    trTotal.append(td, tdTotal);
+    tbody.append(trTotal);
   });
 
   okBtn.addEventListener("click", () => {
-    table.style.display = "none";
-    let text = document.createElement("div");
-    text.classList.add("ordered");
-    text.innerHTML = "Your order has been created successfully!";
-    tableBody.append(text);
-    setTimeout(() => {
+    if (ordered) {
       wrapper.style.display = "flex";
       modal.style.display = "none";
-      text.innerHTML = "";
-    }, 2000);
+      pizza.innerHTML = "";
+      ordered = false;
+      ingredients = [new Product("dough", 1, DOUGH_PRICE)];
+      totalCost = DOUGH_PRICE;
+      total.innerHTML = DOUGH_PRICE;
+      let congratsText = document.querySelector(".ordered");
+      congratsText.remove();
+      sauces.forEach((sauce) => (sauce.checked = false));
+    } else {
+      ordered = true;
+      table.style.display = "none";
+      let text = document.createElement("div");
+      text.classList.add("ordered");
+      text.innerHTML = "Congrats! Your order has been created successfully ";
+      tableBody.append(text);
+    }
   });
 });

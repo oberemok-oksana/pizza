@@ -14,6 +14,7 @@
           <li class="product">
             <img
               data-price="7"
+              data-name="basil"
               class="icons"
               src="./img/basil.png"
               alt="basil"
@@ -23,6 +24,7 @@
           <li class="product">
             <img
               data-price="7"
+              data-name="mushroom"
               class="icons"
               src="./img/mushroom.png"
               alt="mushroom"
@@ -32,6 +34,7 @@
           <li class="product">
             <img
               data-price="4"
+              data-name="paprika"
               class="icons"
               src="./img/paprika.png"
               alt="paprika"
@@ -41,6 +44,7 @@
           <li class="product">
             <img
               data-price="3"
+              data-name="onion"
               class="icons"
               src="./img/onion.png"
               alt="onion"
@@ -50,6 +54,7 @@
           <li class="product">
             <img
               data-price="5"
+              data-name="tomato"
               class="icons"
               src="./img/tomato.png"
               alt="tomato"
@@ -59,13 +64,20 @@
         </ul>
         <div class="wrapper-sauces">
           <div class="sauces">
-            <input data-price="3" type="checkbox" class="sauce" id="ketchup" />
+            <input
+              data-price="3"
+              data-name="ketchup"
+              type="checkbox"
+              class="sauce"
+              id="ketchup"
+            />
             <div class="fake_input"></div>
             <label for="ketchup">Ketchup + 3</label>
           </div>
           <div class="sauces">
             <input
               data-price="4"
+              data-name="mayonnaise"
               type="checkbox"
               class="sauce"
               id="mayonnaise"
@@ -93,17 +105,7 @@
                 <th>Total</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Tomato</td>
-                <td>2</td>
-                <td>6</td>
-                <td>12</td>
-              </tr>
-              <tr>
-                <td colspan="4">Total cost of pizza:</td>
-              </tr>
-            </tbody>
+            <tbody class="chosen_products"></tbody>
           </table>
         </div>
         <div class="modal-window__footer">

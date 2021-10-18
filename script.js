@@ -60,7 +60,13 @@ function getPosOnPizza(mousePos) {
 
 document.addEventListener("DOMContentLoaded", () => {
   pizza = document.querySelector(".circle");
+  let modal = document.querySelector(".modal-window");
+  let orderBtn = document.querySelector(".order_btn");
+  let okBtn = document.querySelector(".ok_btn");
+  let wrapper = document.querySelector(".wrapper");
   let total = document.querySelector("#total-cost");
+  let table = document.querySelector(".bill");
+  let tableBody = document.querySelector(".modal-window__body");
 
   window.addEventListener("mousedown", (e) => {
     e.preventDefault();
@@ -120,5 +126,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       total.innerHTML = totalCost;
     }
+  });
+
+  orderBtn.addEventListener("click", () => {
+    wrapper.style.display = "none";
+    modal.style.display = "flex";
+  });
+
+  okBtn.addEventListener("click", () => {
+    table.style.display = "none";
+    let text = document.createElement("div");
+    text.classList.add("ordered");
+    text.innerHTML = "Your order has been created successfully!";
+    tableBody.append(text);
+    setTimeout(() => {
+      wrapper.style.display = "flex";
+      modal.style.display = "none";
+      text.innerHTML = "";
+    }, 2000);
   });
 });

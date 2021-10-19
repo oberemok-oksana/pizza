@@ -138,13 +138,44 @@
   padding: 15px;
 }
 
-table {
+.bill {
   min-width: 300px;
   border-collapse: collapse;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(0, 0, 0);
+  font-weight: bold;
+}
+thead {
+  border-bottom: 2px solid rgb(0, 0, 0);
+  font-size: 18px;
+  background-color: rgb(156, 151, 151);
 }
 
+.tfoot {
+  background-color: rgb(156, 151, 151);
+  border-top: 2px solid rgb(0, 0, 0);
+}
+
+.ingredient {
+  background-color: rgb(236, 192, 69);
+  border-top: 2px solid rgb(0, 0, 0);
+  border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.ingredient > td {
+  color: #fff;
+  font-weight: 700;
+}
+
+.bill tbody td {
+  text-align: left;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  padding: 10px 15px;
+}
+
+.bill tbody tr:nth-child(even) {
+  background: #f3f3f3;
+}
 th,
 td {
   padding: 15px;

@@ -39,6 +39,7 @@ let pizza;
 const DOUGH_PRICE = 20;
 let totalCost = DOUGH_PRICE;
 let ingredients = [new Product("dough", 1, DOUGH_PRICE)];
+let sauces = [];
 
 function setDragTargetPos(point) {
   let rect = dragTarget.getBoundingClientRect();
@@ -79,7 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let tableBody = document.querySelector(".modal-window__body");
   let tbody = table.querySelector(".chosen_products");
   let ordered = false;
-  let sauces = document.querySelectorAll(".sauce");
+  let allSauces = document.querySelectorAll(".sauce");
+  let tfoot = document.querySelector(".tfoot");
 
   window.addEventListener("mousedown", (e) => {
     e.preventDefault();
@@ -161,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.matches(".sauce")) {
       if (e.target.checked) {
         totalCost += parseFloat(e.target.dataset.price);
-        ingredients.push(
+        sauces.push(
           new Product(
             e.target.dataset.name,
             1,
@@ -170,14 +172,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       } else {
         totalCost -= parseFloat(e.target.dataset.price);
-        let index = ingredients.findIndex(
+        let index = sauces.findIndex(
           (item) => item.name === e.target.dataset.name
         );
-        ingredients.splice(index, 1);
+        sauces.splice(index, 1);
       }
       total.innerHTML = totalCost;
-
-      console.log(ingredients);
     }
   });
 
@@ -186,7 +186,16 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "flex";
     table.style.display = "table";
     tbody.innerHTML = "";
+    tfoot.innerHTML = "";
     let sum = 0;
+    let trIngredients = document.createElement("tr");
+    let tdIngredients = document.createElement("td");
+    tdIngredients.setAttribute("colspan", 4);
+    tdIngredients.innerHTML = "Ingredients";
+    trIngredients.classList.add("ingredient");
+    trIngredients.append(tdIngredients);
+
+    tbody.append(trIngredients);
 
     ingredients.forEach((item) => {
       let tr = document.createElement("tr");
@@ -205,15 +214,43 @@ document.addEventListener("DOMContentLoaded", () => {
       tbody.append(tr);
     });
 
+    if (sauces.length > 0) {
+      debugger;
+      let trSauces = document.createElement("tr");
+      trSauces.classList.add("ingredient");
+      let tdSauces = document.createElement("td");
+      tdSauces.setAttribute("colspan", 4);
+      tdSauces.innerHTML = "Sauces";
+      trSauces.append(tdSauces);
+      tbody.append(trSauces);
+    }
+    sauces.forEach((sauce) => {
+      let tr = document.createElement("tr");
+      let tdSauceName = document.createElement("td");
+      tdSauceName.innerHTML = sauce.name;
+      let tdSaucePrice = document.createElement("td");
+      tdSaucePrice.innerHTML = sauce.price;
+      let tdEmpty = document.createElement("td");
+      tdEmpty.innerHTML = "";
+      let tdEmptySecond = document.createElement("td");
+      tdEmptySecond.innerHTML = "";
+
+      sum += sauce.price;
+      tr.append(tdSauceName, tdEmpty, tdEmptySecond, tdSaucePrice);
+      tbody.append(tr);
+    });
+
     let trTotal = document.createElement("tr");
     let tdTotal = document.createElement("td");
     let td = document.createElement("td");
-    td.setAttribute("colspan", 3);
+    let tdAllCost = document.createElement("td");
+    tdAllCost.innerHTML = "Total";
+    td.setAttribute("colspan", 2);
     tdTotal.classList.add("bold");
     td.classList.add("bold");
     tdTotal.innerHTML = sum;
-    trTotal.append(td, tdTotal);
-    tbody.append(trTotal);
+    trTotal.append(tdAllCost, td, tdTotal);
+    tfoot.append(trTotal);
   });
 
   okBtn.addEventListener("click", () => {
@@ -223,11 +260,12 @@ document.addEventListener("DOMContentLoaded", () => {
       pizza.innerHTML = "";
       ordered = false;
       ingredients = [new Product("dough", 1, DOUGH_PRICE)];
+      sauces = [];
       totalCost = DOUGH_PRICE;
       total.innerHTML = DOUGH_PRICE;
       let congratsText = document.querySelector(".ordered");
       congratsText.remove();
-      sauces.forEach((sauce) => (sauce.checked = false));
+      allSauces.forEach((sauce) => (sauce.checked = false));
     } else {
       ordered = true;
       table.style.display = "none";

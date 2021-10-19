@@ -129,7 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
           );
         }
 
-        console.log(ingredients);
         dragTarget = null;
         total.innerHTML = totalCost;
       } else {
@@ -155,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         ingredients[index].count--;
       }
-      console.log(ingredients);
     }
   });
 
@@ -270,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
       table.style.display = "none";
       let text = document.createElement("div");
       text.classList.add("ordered");
-      text.innerHTML = "Congrats! Your order has been created successfully ";
+      text.innerHTML = "Congrats! Your order has been created successfully";
       tableBody.append(text);
     }
   });

@@ -215,7 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (sauces.length > 0) {
-      debugger;
       let trSauces = document.createElement("tr");
       trSauces.classList.add("ingredient");
       let tdSauces = document.createElement("td");

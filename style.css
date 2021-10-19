@@ -155,7 +155,7 @@ thead {
   border-top: 2px solid rgb(0, 0, 0);
 }
 
-.ingredient {
+.bill tbody tr.ingredient > td {
   background-color: rgb(236, 192, 69);
   border-top: 2px solid rgb(0, 0, 0);
   border-bottom: 2px solid rgb(0, 0, 0);
